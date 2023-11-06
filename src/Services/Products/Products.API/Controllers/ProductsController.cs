@@ -24,4 +24,18 @@ public class ProductsController : ControllerBase
 
         return products;
     }
+
+    [HttpGet]
+    [Route("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<Product>> ProductById(Guid id)
+    {
+        var product = await _productCtx.Products.SingleOrDefaultAsync(p => p.Id == id);
+        if (product == null)
+        {
+            return NotFound();
+        }
+
+        return product;
+    }
 }
