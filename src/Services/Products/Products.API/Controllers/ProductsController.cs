@@ -50,4 +50,43 @@ public class ProductsController : ControllerBase
         // return CreatedAtAction(nameof(ProductByIdAsync), new { id = product.Id }, product);
         return StatusCode(StatusCodes.Status201Created);
     }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    public async Task<ActionResult> UpdateProductAsync([FromBody] Product productToUpdate)
+    {
+        var product = await _productCtx.Products.SingleOrDefaultAsync(p => p.Id == productToUpdate.Id);
+
+        if (product == null)
+        {
+            return NotFound();
+        }
+
+        product = productToUpdate;
+
+        _productCtx.Products.Update(product);
+        await _productCtx.SaveChangesAsync();
+
+        // return CreatedAtAction(nameof(ProductByIdAsync), new { id = product.Id }, product);
+        return StatusCode(StatusCodes.Status201Created);
+    }
+
+    [HttpDelete]
+    [Route("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> DeleteProductAsync(Guid id)
+    {
+        var product = await _productCtx.Products.SingleOrDefaultAsync(p => p.Id == id);
+
+        if (product == null)
+        {
+            return NotFound();
+        }
+
+        _productCtx.Products.Remove(product);
+        await _productCtx.SaveChangesAsync();
+
+        return Ok();
+    }
 }
