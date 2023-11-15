@@ -3,11 +3,13 @@ using Inveon.eCommerceExample.Products.API.Infrastructure;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Inveon.eCommerceExample.Products.API.Controllers;
 
 [ApiController]
 [Route("api/v1/products")]
+[Authorize]
 public class ProductsController : ControllerBase
 {
     private readonly ProductContext _productCtx;
