@@ -1,0 +1,88 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/api/v1/products",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/api/v1/products",
+            "UpstreamHttpMethod": ["Get", "Post"],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7001
+                }
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/v1/products/{id}",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/api/v1/products/{id}",
+            "UpstreamHttpMethod": ["Get", "Put", "Delete"],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7001
+                }
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/v1/auth/register",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/api/v1/auth/register",
+            "UpstreamHttpMethod": ["Post"],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7000
+                }
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/v1/auth/login",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/api/v1/auth/login",
+            "UpstreamHttpMethod": ["Post"],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7000
+                }
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/v1/carts",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/api/v1/carts",
+            "UpstreamHttpMethod": ["Post"],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7002
+                }
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/v1/carts/{cartId}",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/api/v1/carts/{cartId}",
+            "UpstreamHttpMethod": ["Get"],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7002
+                }
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/v1/carts/{cartId}/items/{itemId}",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/api/v1/carts/{cartId}/items/{itemId}",
+            "UpstreamHttpMethod": ["Patch", "Delete"],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7002
+                }
+            ]
+        }
+    ]
+}
