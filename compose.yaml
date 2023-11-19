@@ -1,0 +1,36 @@
+services:
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+
+  api-gateway:
+    build:
+      context: ./src/ApiGateway/Ocelot.API.Gateway
+    ports:
+      - 8080:80
+    depends_on:
+      - auth-api
+      - product-api
+      - cart-api
+      
+  auth-api:
+    build: 
+      context: ./src/Services/Auth/Auth.API
+    depends_on:
+      - database
+
+  product-api:
+    build: 
+      context: ./src/Services/Products/Products.API
+    depends_on:
+      - database
+
+  cart-api:
+    build: 
+      context: ./src/Services/Carts/Carts.API
+    depends_on:
+      - database
+      - product-api

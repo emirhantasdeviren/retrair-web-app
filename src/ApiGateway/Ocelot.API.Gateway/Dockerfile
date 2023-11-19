@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 
 WORKDIR /src
 
-COPY Products.API.csproj .
+COPY Ocelot.API.Gateway.csproj .
 RUN dotnet restore
 
 COPY . .
@@ -14,4 +14,4 @@ WORKDIR /app
 
 COPY --from=build /app .
 
-ENTRYPOINT ["dotnet", "Products.API.dll"]
+ENTRYPOINT ["dotnet", "Ocelot.API.Gateway.dll"]

@@ -9,7 +9,7 @@ namespace Inveon.eCommerceExample.Products.API.Controllers;
 
 [ApiController]
 [Route("api/v1/products")]
-[Authorize]
+// [Authorize]
 public class ProductsController : ControllerBase
 {
     private readonly ProductContext _productCtx;

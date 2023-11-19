@@ -7,8 +7,8 @@
             "UpstreamHttpMethod": ["Get", "Post"],
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "localhost",
-                    "Port": 7001
+                    "Host": "product-api",
+                    "Port": 80
                 }
             ]
         },
@@ -19,8 +19,8 @@
             "UpstreamHttpMethod": ["Get", "Put", "Delete"],
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "localhost",
-                    "Port": 7001
+                    "Host": "product-api",
+                    "Port": 80
                 }
             ]
         },
@@ -31,8 +31,8 @@
             "UpstreamHttpMethod": ["Post"],
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "localhost",
-                    "Port": 7000
+                    "Host": "auth-api",
+                    "Port": 80
                 }
             ]
         },
@@ -43,8 +43,8 @@
             "UpstreamHttpMethod": ["Post"],
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "localhost",
-                    "Port": 7000
+                    "Host": "auth-api",
+                    "Port": 80
                 }
             ]
         },
@@ -55,8 +55,8 @@
             "UpstreamHttpMethod": ["Post"],
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "localhost",
-                    "Port": 7002
+                    "Host": "cart-api",
+                    "Port": 80
                 }
             ]
         },
@@ -67,8 +67,8 @@
             "UpstreamHttpMethod": ["Get"],
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "localhost",
-                    "Port": 7002
+                    "Host": "cart-api",
+                    "Port": 80
                 }
             ]
         },
@@ -79,8 +79,8 @@
             "UpstreamHttpMethod": ["Patch", "Delete"],
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "localhost",
-                    "Port": 7002
+                    "Host": "cart-api",
+                    "Port": 80
                 }
             ]
         }
