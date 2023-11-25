@@ -56,7 +56,9 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var _db = scope.ServiceProvider.GetRequiredService<ProductContext>();
-    _db.Database.Migrate();
+    if (_db.Database.GetPendingMigrations().Count() > 0) {
+        _db.Database.Migrate();
+    }
 }
 
 app.Run();
