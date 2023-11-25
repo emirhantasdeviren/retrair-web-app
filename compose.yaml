@@ -1,9 +1,7 @@
 services:
   database:
     image: postgres
-    restart: always
     environment:
-      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
 
   api-gateway:
@@ -32,5 +30,4 @@ services:
     build: 
       context: ./src/Services/Carts/Carts.API
     depends_on:
-      - database
       - product-api
