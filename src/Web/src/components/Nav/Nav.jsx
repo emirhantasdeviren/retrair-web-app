@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import "./Nav.css";
 
 const Nav = () => {
@@ -5,10 +6,10 @@ const Nav = () => {
         <nav>
             <ul>
                 <li>
-                    <a href="/store">Home</a>
+                    <NavLink to={"/"}>Home</NavLink>
                 </li>
                 <li>
-                    <a href="/store">Store</a>
+                    <NavLink to={"/store"}>Store</NavLink>
                 </li>
                 <li>
                     <a href="/about">About</a>
@@ -33,6 +34,9 @@ const Nav = () => {
                             />
                         </svg>
                     </a>
+                </li>
+                <li className="sign-in">
+                    <NavLink to={"/signin"}>Sign In</NavLink>
                 </li>
             </ul>
         </nav>

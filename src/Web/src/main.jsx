@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
+import Store, { loader as storeLoader } from "./pages/Store";
 
 const router = createBrowserRouter([
     {
@@ -14,6 +15,11 @@ const router = createBrowserRouter([
                 index: true,
                 element: <Home />,
             },
+            {
+                path: "/store",
+                element: <Store />,
+                loader: storeLoader,
+            }
         ],
     },
 ]);

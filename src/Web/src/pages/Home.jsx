@@ -1,11 +1,5 @@
-import Catalog from "../components/Catalog/Catalog";
-
 const Home = () => {
-    return (
-        <main>
-            <Catalog />
-        </main>
-    );
+    return <div>Hello</div>;
 };
 
 export default Home;

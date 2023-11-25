@@ -2,45 +2,17 @@ import ProductCard from "../ProductCard/ProductCard";
 import "./Catalog.css";
 
 const Catalog = ({ products }) => {
-    return (
-        <ul className="catalog">
-            <li>
-                <ProductCard
-                    name="Air Jordan Retro High - Red"
-                    price="4990,90₺"
-                    image="https://placehold.co/250x150"
-                />
-            </li>
-            <li>
-                <ProductCard
-                    name="Air Jordan Retro High - Red"
-                    price="4990,90₺"
-                    image="https://placehold.co/250x150"
-                />
-            </li>
-            <li>
-                <ProductCard
-                    name="Air Jordan Retro High - Red"
-                    price="4990,90₺"
-                    image="https://placehold.co/250x150"
-                />
-            </li>
-            <li>
-                <ProductCard
-                    name="Air Jordan Retro High - Red"
-                    price="4990,90₺"
-                    image="https://placehold.co/250x150"
-                />
-            </li>
-            <li>
-                <ProductCard
-                    name="Air Jordan Retro High - Red"
-                    price="4990,90₺"
-                    image="https://placehold.co/250x150"
-                />
-            </li>
-        </ul>
-    );
+    const listProducts = products.map((p) => (
+        <li key={p.id}>
+            <ProductCard
+                name={p.name}
+                price={p.price + "₺"}
+                image={p.imagePath}
+            />
+        </li>
+    ));
+
+    return <ul className="catalog">{listProducts}</ul>;
 };
 
 export default Catalog;
