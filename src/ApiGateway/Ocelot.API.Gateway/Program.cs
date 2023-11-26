@@ -15,8 +15,9 @@ builder.Services.AddCors(options =>
             policy =>
             {
                 policy
-                    .WithOrigins("http://localhost:5173")
+                    .WithOrigins("http://localhost:5000")
                     .WithMethods("GET", "POST", "DELETE", "PUT", "PATCH")
+                    .WithHeaders("Content-Type", "Authorization")
                     .AllowCredentials();
             });
 });
