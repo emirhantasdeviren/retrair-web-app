@@ -38,6 +38,9 @@ const Nav = () => {
                 <li className="sign-in">
                     <NavLink to={"/signin"}>Sign In</NavLink>
                 </li>
+                <li className="sign-up">
+                    <NavLink to={"/signup"}>Sign Up</NavLink>
+                </li>
             </ul>
         </nav>
     );
