@@ -39,4 +39,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using (var scope = app.Services.CreateScope())
+{
+    var _db = scope.ServiceProvider.GetRequiredService<AuthContext>();
+    var pendingMigrations = await _db.Database.GetPendingMigrationsAsync();
+    if (pendingMigrations.Any()) {
+        await _db.Database.MigrateAsync();
+    }
+}
+
 app.Run();

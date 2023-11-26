@@ -56,8 +56,9 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var _db = scope.ServiceProvider.GetRequiredService<ProductContext>();
-    if (_db.Database.GetPendingMigrations().Count() > 0) {
-        _db.Database.Migrate();
+    var pendingMigrations = await _db.Database.GetPendingMigrationsAsync();
+    if (pendingMigrations.Any()) {
+        await _db.Database.MigrateAsync();
     }
 }
 
