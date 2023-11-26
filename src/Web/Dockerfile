@@ -1,4 +1,4 @@
-FROM node:lts-slim
+FROM node:20-bookworm-slim
 
 WORKDIR /src
 
@@ -9,4 +9,4 @@ RUN npm ci
 
 COPY . .
 
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["npm", "run", "dev"]
