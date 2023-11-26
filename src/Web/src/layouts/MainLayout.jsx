@@ -1,15 +1,16 @@
 import Nav from "../components/Nav/Nav";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
-import SignIn from "../components/SignIn/SignIn";
+import { useAuth } from "../hooks/useAuth";
 
 const MainLayout = () => {
+    const auth = useAuth();
+
     return (
         <>
             <Nav />
             <main>
-                <Outlet />
-                <SignIn />
+                <Outlet context={auth} />
             </main>
             <Footer />
         </>

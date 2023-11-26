@@ -1,5 +1,8 @@
+import { useOutletContext } from "react-router-dom";
+
 const Home = () => {
-    return <div>Hello</div>;
+    const { user } = useOutletContext();
+    return <div>{user ? user.name : "Guest"}</div>;
 };
 
 export default Home;
