@@ -5,6 +5,8 @@ import "./index.css";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Store, { loader as storeLoader } from "./pages/Store";
+import SignIn from "./pages/SignIn";
+import SignUp, { action as signUpAction } from "./pages/SignUp";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +21,16 @@ const router = createBrowserRouter([
                 path: "/store",
                 element: <Store />,
                 loader: storeLoader,
-            }
+            },
+            {
+                path: "/signin",
+                element: <SignIn />,
+            },
+            {
+                path: "/signup",
+                element: <SignUp />,
+                action: signUpAction,
+            },
         ],
     },
 ]);
@@ -27,5 +38,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
         <RouterProvider router={router}></RouterProvider>
-    </React.StrictMode>,
+    </React.StrictMode>
 );
