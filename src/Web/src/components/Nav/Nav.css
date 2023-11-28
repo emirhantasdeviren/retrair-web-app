@@ -12,15 +12,13 @@ nav ul {
     max-width: max-content;
     padding: 0;
     margin: 0 auto;
-}
-
-nav ul li {
-    padding: 0 3rem;
+    gap: 3em;
 }
 
 nav ul li svg {
     width: 23px;
     height: 23px;
+    display: flex;
 }
 
 a:link,
