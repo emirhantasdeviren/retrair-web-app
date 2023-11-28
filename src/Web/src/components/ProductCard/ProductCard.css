@@ -4,7 +4,7 @@
     justify-content: center;
     width: auto;
     aspect-ratio: 3 / 4;
-
+    padding: 0 0 1em 0;
     background: #ffffff;
     border-radius: 20px;
     box-shadow: 2px 4px 12px rgba(0,0,0,.08);
@@ -20,6 +20,7 @@
     margin: auto;
     max-width: 306px;
     aspect-ratio: 3 / 2;
+    object-fit: contain;
 }
 
 .product-card h3 {
