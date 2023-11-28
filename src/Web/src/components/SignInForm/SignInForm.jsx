@@ -9,38 +9,33 @@ const SignInForm = () => {
     const navigate = useNavigate();
     const { signIn } = useOutletContext();
 
+    const onSubmit = async (event) => {
+        event.preventDefault();
+
+        const res = await fetch("http://localhost:8080/api/v1/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            mode: "cors",
+            body: JSON.stringify({
+                userName: email,
+                password: password,
+            }),
+        });
+
+        if (res.status === 200) {
+            const { user, token } = await res.json();
+            localStorage.setItem("token", token);
+            signIn(user);
+            navigate("/");
+        }
+    };
+
     return (
         <div className="sign-in-form">
             <div className="sign-in-body">
-                <form
-                    method="post"
-                    className="sign-in"
-                    onSubmit={async (event) => {
-                        event.preventDefault();
-
-                        const res = await fetch(
-                            "http://localhost:8080/api/v1/auth/login",
-                            {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                mode: "cors",
-                                body: JSON.stringify({
-                                    userName: email,
-                                    password: password,
-                                }),
-                            }
-                        );
-
-                        if (res.status === 200) {
-                            const { user, token } = await res.json();
-                            sessionStorage.setItem("token", token);
-                            signIn(user);
-                            navigate("/");
-                        }
-                    }}
-                >
+                <form method="post" className="sign-in" onSubmit={onSubmit}>
                     <label htmlFor="userName">Email</label>
                     <input
                         id="userName"
