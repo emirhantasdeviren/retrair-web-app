@@ -8,4 +8,5 @@ ul.catalog {
     max-width: max-content;
     margin: 1rem auto;
     padding: 1rem;
+    gap: 1.5em;
 }
