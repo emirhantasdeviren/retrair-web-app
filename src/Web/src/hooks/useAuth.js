@@ -4,7 +4,7 @@ export const useAuth = () => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const token = sessionStorage.getItem("token");
+        const token = localStorage.getItem("token");
         if (token) {
             const [header, payload, signature] = token.split(".");
             const user = JSON.parse(atob(payload));
@@ -19,7 +19,7 @@ export const useAuth = () => {
 
     const signOut = () => {
         setUser(null);
-        sessionStorage.clear();
+        localStorage.clear();
     };
 
     return { user, signIn, signOut };
