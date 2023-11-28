@@ -8,7 +8,7 @@ const MainLayout = () => {
 
     return (
         <>
-            <Nav />
+            <Nav user={auth.user} />
             <main>
                 <Outlet context={auth} />
             </main>
