@@ -1,3 +1,4 @@
+import { redirect } from "react-router-dom";
 import SignUpForm from "../components/SignUpForm/SignUpForm";
 
 export const action = async ({ request }) => {
@@ -11,7 +12,7 @@ export const action = async ({ request }) => {
         body: JSON.stringify(account),
     });
     if (res.status === 200) {
-        return await res.json();
+        return redirect("/signin");
     } else {
         return null;
     }
