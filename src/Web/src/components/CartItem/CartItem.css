@@ -9,6 +9,13 @@
     box-shadow: 2px 4px 12px rgba(0,0,0,.08);
 }
 
+.cart-item img {
+    margin: auto;
+    max-width: 306px;
+    aspect-ratio: 3 / 2;
+    object-fit: contain;
+}
+
 .cart-item-info {
     display: flex;
     flex-flow: column nowrap;
