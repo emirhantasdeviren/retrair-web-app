@@ -9,6 +9,19 @@ builder
     .SetBasePath(builder.Environment.ContentRootPath)
     .AddJsonFile("ocelot.json", optional: false);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "ReactCorsPolicy",
+            policy =>
+            {
+                policy
+                    .WithOrigins("http://localhost:5000")
+                    .WithMethods("GET", "POST", "DELETE", "PUT", "PATCH")
+                    .WithHeaders("Content-Type", "Authorization")
+                    .AllowCredentials();
+            });
+});
+
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddOcelot();
@@ -26,6 +39,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("ReactCorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();

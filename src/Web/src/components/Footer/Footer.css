@@ -1,0 +1,24 @@
+footer {
+    border-top: 1px solid #d2d2d7;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+footer ul {
+    list-style: none;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    max-width: 1024px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+footer ul li {
+    padding: 0 3rem;
+    border-right: 1px solid #d2d2d7;
+}
+
+footer ul li:last-child {
+    border: none;
+}

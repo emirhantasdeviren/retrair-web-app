@@ -1,10 +1,17 @@
 services:
   database:
     image: postgres
-    restart: always
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
+      POSTGRES_MULTIPLE_DATABASES: ecommerce_auth,ecommerce_product,ecommerce_cart
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   api-gateway:
     build:
@@ -20,17 +27,26 @@ services:
     build: 
       context: ./src/Services/Auth/Auth.API
     depends_on:
-      - database
+      database:
+        condition: service_healthy
 
   product-api:
     build: 
       context: ./src/Services/Products/Products.API
     depends_on:
-      - database
+      database:
+        condition: service_healthy
 
   cart-api:
     build: 
       context: ./src/Services/Carts/Carts.API
     depends_on:
-      - database
       - product-api
+
+  # web:
+  #   build:
+  #     context: ./src/Web/
+  #   ports:
+  #     - 5000:5000
+  #   depends_on:
+  #     - api-gateway

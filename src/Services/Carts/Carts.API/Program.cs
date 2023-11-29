@@ -1,5 +1,6 @@
 using Inveon.eCommerceExample.Carts.API.Infrastructure;
 using Inveon.eCommerceExample.Carts.API.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,5 +28,14 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var _db = scope.ServiceProvider.GetRequiredService<CartContext>();
+    var pendingMigrations = await _db.Database.GetPendingMigrationsAsync();
+    if (pendingMigrations.Any()) {
+        await _db.Database.MigrateAsync();
+    }
+}
 
 app.Run();

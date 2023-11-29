@@ -1,0 +1,30 @@
+.summary {
+    margin-top: 3rem;
+    width: 306px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.summary-total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 1px solid;
+}
+
+.summary button {
+    margin: auto;
+    border-radius: 10px;
+    border: solid thin #cccccc;
+    font-size: 15px;
+    cursor: pointer;
+    width: inherit;
+    height: 35px;
+}

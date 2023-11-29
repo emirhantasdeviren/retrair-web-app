@@ -1,0 +1,29 @@
+.cart-item {
+    width: 612px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
+}
+
+.cart-item img {
+    margin: auto;
+    max-width: 306px;
+    aspect-ratio: 3 / 2;
+    object-fit: contain;
+}
+
+.cart-item-info {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    height: 150px;
+}
+
+.item-title {
+    margin: 0;
+    white-space: normal;
+}
