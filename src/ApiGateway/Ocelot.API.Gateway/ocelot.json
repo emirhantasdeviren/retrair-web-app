@@ -73,6 +73,18 @@
             ]
         },
         {
+            "DownstreamPathTemplate": "/api/v1/carts/{cartId}/items",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/api/v1/carts/{cartId}/items",
+            "UpstreamHttpMethod": ["Post"],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "cart-api",
+                    "Port": 80
+                }
+            ]
+        },
+        {
             "DownstreamPathTemplate": "/api/v1/carts/{cartId}/items/{itemId}",
             "DownstreamScheme": "http",
             "UpstreamPathTemplate": "/api/v1/carts/{cartId}/items/{itemId}",
