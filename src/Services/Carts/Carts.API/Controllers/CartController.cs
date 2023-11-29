@@ -25,10 +25,10 @@ public class CartController : ControllerBase
     {
         // TODO: In the future this check can be removed so that customers can
         // have multiple carts for behaviour analysis
-        if (await _cartCtx.Carts.SingleOrDefaultAsync(c => c.CustomerId == createCart.CustomerId) != null)
-        {
-            return BadRequest();
-        }
+        // if (await _cartCtx.Carts.SingleOrDefaultAsync(c => c.CustomerId == createCart.CustomerId) != null)
+        // {
+        //     return BadRequest();
+        // }
 
         var cart = new Cart(createCart.CustomerId);
         var cartItem = new CartItem(cart.Id, createCart.ProductId);
@@ -81,14 +81,31 @@ public class CartController : ControllerBase
 
     }
 
+    [HttpPost]
+    [Route("{cartId:guid}/items")]
+    public async Task<ActionResult> AddItemToCart(Guid cartId, [FromBody] AddItemRequest addItemRequest)
+    {
+        var cart = await _cartCtx.Carts.SingleOrDefaultAsync(c => c.Id == cartId);
+        if (cart is null)
+        {
+            return NotFound();
+        }
+        var item = new CartItem(cartId, addItemRequest.ProductId);
+        await _cartCtx.CartItems.AddAsync(item);
+        await _cartCtx.SaveChangesAsync();
+
+        return NoContent();
+    }
+
     [HttpPatch]
     [Route("{cartId:guid}/items/{productId:guid}")]
-    public async Task<ActionResult> UpdateCartItemQuantity(Guid cartId, Guid productId, [FromBody] int quantity)
+    public async Task<ActionResult> UpdateCartItemQuantity(Guid cartId, Guid productId, [FromBody] UpdateQuantityRequest updateQuantityRequest)
     {
-        if (quantity < 1)
+        if (updateQuantityRequest.Quantity < 1)
         {
             return BadRequest();
         }
+
         var cartItem = await _cartCtx
             .CartItems
             .SingleOrDefaultAsync(i => i.CartId == cartId && i.ProductId == productId);
@@ -97,12 +114,12 @@ public class CartController : ControllerBase
             return BadRequest();
         }
 
-        cartItem.Quantity = quantity;
+        cartItem.Quantity = updateQuantityRequest.Quantity;
 
         _cartCtx.CartItems.Update(cartItem);
         await _cartCtx.SaveChangesAsync();
 
-        return Ok();
+        return NoContent();
     }
 
     [HttpDelete]

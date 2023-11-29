@@ -7,7 +7,7 @@ public class CartItem
     public Guid ProductId { get; set; }
     public int Quantity { get; set; } = 1;
 
-    public virtual Cart Cart { get; set; }
+    public virtual Cart? Cart { get; set; }
 
     public CartItem(Guid cartId, Guid productId)
     {
