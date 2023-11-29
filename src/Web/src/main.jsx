@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Store, { loader as storeLoader } from "./pages/Store";
 import SignIn from "./pages/SignIn";
 import SignUp, { action as signUpAction } from "./pages/SignUp";
-import ShoppingCart from "./pages/ShoppingCart";
+import ShoppingCart, { loader as shoppingCartLoader } from "./pages/ShoppingCart";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +26,7 @@ const router = createBrowserRouter([
             {
                 path: "/cart",
                 element: <ShoppingCart />,
+                loader: shoppingCartLoader,
             },
             {
                 path: "/signin",
