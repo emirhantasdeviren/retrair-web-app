@@ -5,6 +5,7 @@ const Catalog = ({ products }) => {
     const listProducts = products.map((p) => (
         <li key={p.id}>
             <ProductCard
+                id={p.id}
                 name={p.name}
                 price={p.price + "₺"}
                 image={p.imagePath}
