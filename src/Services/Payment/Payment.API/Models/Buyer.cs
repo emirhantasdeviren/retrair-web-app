@@ -1,5 +1,3 @@
-using System.Net;
-
 namespace Inveon.eCommerceExample.Payment.API.Models;
 
 public class Buyer
