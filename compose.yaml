@@ -42,6 +42,10 @@ services:
       context: ./src/Services/Carts/Carts.API
     depends_on:
       - product-api
+  
+  payment-api:
+    build:
+      context: ./src/Services/Payment/Payment.API
 
   # web:
   #   build:
