@@ -1,10 +1,7 @@
-using System.Diagnostics;
 using AutoMapper;
 using Inveon.eCommerceExample.Payment.API.Models;
 using Inveon.eCommerceExample.Payment.API.Services;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Inveon.eCommerceExample.Payment.API.Controllers;
 
@@ -28,6 +25,13 @@ public class PaymentController : ControllerBase
             _mapper.Map<Iyzipay.Request.CreatePaymentRequest>(paymentDetails);
         var payment = _iyzipay.CreatePayment(paymentRequest);
 
-        return Ok(payment);
+        if (payment.Status == "failure")
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, payment);
+        }
+        else
+        {
+            return Ok(payment);
+        }
     }
 }
