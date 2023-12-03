@@ -13,6 +13,9 @@ internal class ItemEntityTypeConfiguration : IEntityTypeConfiguration<Models.Ite
         builder.Property(i => i.PaymentId).IsRequired();
         builder.Property(i => i.PaidPrice).IsRequired();
 
-        builder.HasOne(i => i.Order).WithMany(o => o.Items);
+        builder.HasOne(i => i.Order)
+            .WithMany(o => o.Items)
+            .HasForeignKey(i => i.OderId)
+            .IsRequired();
     }
 }

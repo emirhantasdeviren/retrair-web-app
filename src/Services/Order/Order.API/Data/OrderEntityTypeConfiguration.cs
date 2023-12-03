@@ -10,12 +10,19 @@ internal class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Models.Or
         builder.ToTable("orders");
 
         builder.HasKey(o => o.Id);
+        builder.OwnsOne(o => o.ShippingAddress);
+        builder.OwnsOne(o => o.BillingAddress);
+
         builder.Property(o => o.CreatedAt).IsRequired();
         builder.Property(o => o.PaymentId).IsRequired();
         builder.Property(o => o.PaidPrice).IsRequired();
         builder.Property(o => o.UserId).IsRequired();
         builder.Property(o => o.BillingAddress).IsRequired();
         builder.Property(o => o.ShippingAddress).IsRequired();
-        builder.HasMany(o => o.Items).WithOne(i => i.Order);
+        builder
+            .HasMany(o => o.Items)
+            .WithOne(i => i.Order)
+            .HasForeignKey(i => i.OderId)
+            .IsRequired();
     }
 }
