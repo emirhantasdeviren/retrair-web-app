@@ -7,7 +7,10 @@ import Home from "./pages/Home";
 import Store, { loader as storeLoader } from "./pages/Store";
 import SignIn from "./pages/SignIn";
 import SignUp, { action as signUpAction } from "./pages/SignUp";
-import ShoppingCart, { loader as shoppingCartLoader } from "./pages/ShoppingCart";
+import ShoppingCart, {
+    loader as shoppingCartLoader,
+} from "./pages/ShoppingCart";
+import Checkout, { loader as checkoutLoader} from "./pages/Checkout";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +39,11 @@ const router = createBrowserRouter([
                 path: "/signup",
                 element: <SignUp />,
                 action: signUpAction,
+            },
+            {
+                path: "/checkout",
+                element: <Checkout />,
+                loader: checkoutLoader,
             },
         ],
     },
