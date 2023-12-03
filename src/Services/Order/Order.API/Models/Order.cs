@@ -4,10 +4,10 @@ public class Order
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public required string PaymentId { get; set; }
-    public DateTimeOffset CreatedAt { get; set; } = new DateTimeOffset(DateTime.UtcNow, new TimeSpan(3, 0, 0));
-    public DateTimeOffset? DeliveredAt { get; set; }
-    public DateTimeOffset? CanceledAt { get; set; }
-    public DateTimeOffset? RefundedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? DeliveredAt { get; set; }
+    public DateTime? CanceledAt { get; set; }
+    public DateTime? RefundedAt { get; set; }
     public required Guid UserId { get; set; }
     public required Address ShippingAddress { get; set; }
     public required Address BillingAddress { get; set; }

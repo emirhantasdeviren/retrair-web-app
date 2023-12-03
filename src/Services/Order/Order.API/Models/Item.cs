@@ -2,7 +2,8 @@ namespace Inveon.eCommerceExample.Order.API.Models;
 
 public class Item
 {
-    public required Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public required Guid ItemId { get; set; }
     public required string PaymentId { get; set; }
     public double PaidPrice { get; set; }
 
