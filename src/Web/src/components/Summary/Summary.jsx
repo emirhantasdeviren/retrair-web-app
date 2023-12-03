@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import "./Summary.css";
 
 const Summary = ({ items }) => {
@@ -24,7 +25,7 @@ const Summary = ({ items }) => {
                     {(subtotal + shipping).toFixed(2) + "₺"}
                 </div>
             </div>
-            <button>Check Out</button>
+            <NavLink className="checkout-btn" to="/checkout">Checkout</NavLink>
         </div>
     );
 };
