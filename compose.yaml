@@ -6,12 +6,25 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
-      POSTGRES_MULTIPLE_DATABASES: ecommerce_auth,ecommerce_product,ecommerce_cart
+      POSTGRES_MULTIPLE_DATABASES: ecommerce_auth,ecommerce_product,ecommerce_cart,ecommerce_order
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
+
+  event-bus:
+    image: rabbitmq:management
+    environment:
+      RABBITMQ_DEFAULT_USER: retrair
+      RABBITMQ_DEFAULT_PASS: 12345
+    ports:
+      - 15672:15672
+    healthcheck:
+      test: rabbitmq-diagnostics -q status
+      interval: 30s
+      timeout: 30s
+      retries: 3
 
   api-gateway:
     build:
@@ -46,6 +59,15 @@ services:
   payment-api:
     build:
       context: ./src/Services/Payment/Payment.API
+
+  order-api:
+    build:
+      context: ./src/Services/Order/Order.API
+    depends_on:
+      database:
+        condition: service_healthy
+      event-bus:
+        condition: service_healthy
 
   # web:
   #   build:
