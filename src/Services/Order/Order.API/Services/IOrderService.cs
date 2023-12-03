@@ -4,5 +4,5 @@ namespace Inveon.eCommerceExample.Order.API.Services;
 
 public interface IOrderService
 {
-    public Task<bool> AddOrder(OrderMessage orderMessage);
+    public bool AddOrder(OrderMessage orderMessage);
 }

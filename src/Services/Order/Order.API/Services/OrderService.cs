@@ -13,7 +13,7 @@ public class OrderService : IOrderService
         _ctx = ctx;
     }
 
-    public async Task<bool> AddOrder(OrderMessage orderMessage)
+    public bool AddOrder(OrderMessage orderMessage)
     {
         try
         {
@@ -26,29 +26,25 @@ public class OrderService : IOrderService
                 PaidPrice = orderMessage.PaidPrice,
             };
 
-            var items = new List<Item>();
             foreach (var i in orderMessage.ItemTransactions)
             {
-                items.Add(new Item
+                order.Items.Add(new Item
                 {
-                    Id = i.ItemId,
+                    ItemId = i.ItemId,
                     PaidPrice = i.PaidPrice,
                     PaymentId = i.PaymentTransactionId,
                     OderId = order.Id,
-                    Order = order
                 });
             }
 
-            order.Items = items;
-
-            await _ctx.Orders.AddAsync(order);
-            await _ctx.Items.AddRangeAsync(items);
-            await _ctx.SaveChangesAsync();
+            _ctx.Orders.Add(order);
+            _ctx.SaveChanges();
 
             return true;
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             return false;
         }
     }

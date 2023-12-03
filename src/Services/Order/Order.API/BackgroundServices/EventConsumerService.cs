@@ -1,6 +1,7 @@
-using System.Runtime.CompilerServices;
 using System.Text;
-using Microsoft.AspNetCore.Connections;
+using Inveon.eCommerceExample.Order.API.Models;
+using Inveon.eCommerceExample.Order.API.Services;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -12,36 +13,52 @@ public class EventConsumerService : BackgroundService
     private readonly string _queueName;
     private readonly IConnection _connection;
     private readonly IModel _channel;
+    private readonly IServiceProvider _serviceProvider;
 
-    public EventConsumerService()
+    public EventConsumerService(IServiceProvider serviceProvider)
     {
-        _hostName = "event_bus";
-        _queueName = "order_queue";
+        _hostName = "event-bus";
+        _queueName = "order-queue";
 
-        var factory = new ConnectionFactory { HostName = _hostName, DispatchConsumersAsync = true };
+        var factory = new ConnectionFactory { HostName = _hostName, UserName = "retrair", Password = "12345"};
 
         _connection = factory.CreateConnection();
         _channel = _connection.CreateModel();
+        _channel.QueueDeclare(
+            queue: "order-queue",
+            durable: false,
+            exclusive: false,
+            autoDelete: false,
+            arguments: null
+        );
+        _serviceProvider = serviceProvider;
+
+        Console.WriteLine("Background service started");
     }
 
-    private async Task ReceivedAsync(object? model, BasicDeliverEventArgs ea)
+    private void Received(object? model, BasicDeliverEventArgs ea)
     {
         var body = ea.Body.ToArray();
         var message = Encoding.UTF8.GetString(body);
 
         Console.WriteLine($"Received message: {message}");
+        var orderMessage = JsonConvert.DeserializeObject<OrderMessage>(message);
+        Console.WriteLine(JsonConvert.SerializeObject(orderMessage, Formatting.Indented));
+        using (var scope = _serviceProvider.CreateScope())
+        {
+            var orderService = scope.ServiceProvider.GetRequiredService<IOrderService>();
+            orderService.AddOrder(orderMessage);
+        }
 
         _channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
-
-        await Task.Yield();
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
         stoppingToken.ThrowIfCancellationRequested();
 
-        var consumer = new AsyncEventingBasicConsumer(_channel);
-        consumer.Received += ReceivedAsync;
+        var consumer = new EventingBasicConsumer(_channel);
+        consumer.Received += Received;
 
         _channel.BasicConsume(queue: _queueName, autoAck: false, consumer);
 
