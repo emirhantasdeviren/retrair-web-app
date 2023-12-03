@@ -5,6 +5,7 @@ namespace Inveon.eCommerceExample.Order.API.Data;
 public class OrderContext : DbContext
 {
     public DbSet<Models.Order> Orders { get; set; }
+    public DbSet<Models.Item> Items { get; set; }
     protected readonly IConfiguration Configuration;
 
     public OrderContext(IConfiguration configuration)
