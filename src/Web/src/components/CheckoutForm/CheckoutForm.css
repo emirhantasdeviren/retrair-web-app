@@ -1,0 +1,39 @@
+.checkout-form-outline {
+    width: 514px;
+}
+
+.checkout-form {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.checkout-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.checkout-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-stretch {
+    grid-column: 1 / -1;
+}
+
+.expire-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.expire-date input {
+    width: 50%;
+}
+
+.checkout-btn {
+    width: 50%;
+}
