@@ -35,6 +35,8 @@ services:
       - auth-api
       - product-api
       - cart-api
+      - payment-api
+      - order-api
       
   auth-api:
     build: 
@@ -59,6 +61,9 @@ services:
   payment-api:
     build:
       context: ./src/Services/Payment/Payment.API
+    depends_on:
+      event-bus:
+        condition: service_healthy
 
   order-api:
     build:
@@ -69,10 +74,10 @@ services:
       event-bus:
         condition: service_healthy
 
-  # web:
-  #   build:
-  #     context: ./src/Web/
-  #   ports:
-  #     - 5000:5000
-  #   depends_on:
-  #     - api-gateway
+  web:
+    build:
+      context: ./src/Web/
+    ports:
+      - 5000:5000
+    depends_on:
+      - api-gateway

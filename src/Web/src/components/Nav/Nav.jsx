@@ -20,10 +20,7 @@ const Nav = ({ user }) => {
         <nav>
             <ul>
                 <li>
-                    <NavLink to={"/"}>Home</NavLink>
-                </li>
-                <li>
-                    <NavLink to={"/store"}>Store</NavLink>
+                    <NavLink to={"/"}>Store</NavLink>
                 </li>
                 <li>
                     <a href="/about">About</a>
@@ -50,7 +47,7 @@ const Nav = ({ user }) => {
                     </NavLink>
                 </li>
                 {user ? (
-                    <User user={user}/>
+                    <User user={user} />
                 ) : (
                     <>
                         <SignInLink />

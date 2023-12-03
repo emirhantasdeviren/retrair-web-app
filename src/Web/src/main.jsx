@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import MainLayout from "./layouts/MainLayout";
-import Home from "./pages/Home";
+// import Home from "./pages/Home";
 import Store, { loader as storeLoader } from "./pages/Store";
 import SignIn from "./pages/SignIn";
 import SignUp, { action as signUpAction } from "./pages/SignUp";
@@ -11,6 +11,8 @@ import ShoppingCart, {
     loader as shoppingCartLoader,
 } from "./pages/ShoppingCart";
 import Checkout, { loader as checkoutLoader} from "./pages/Checkout";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const router = createBrowserRouter([
     {
@@ -19,12 +21,16 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Home />,
-            },
-            {
-                path: "/store",
                 element: <Store />,
                 loader: storeLoader,
+            },
+            {
+                path: "/about",
+                element: <About />,
+            },
+            {
+                path: "/contact",
+                element: <Contact />,
             },
             {
                 path: "/cart",
