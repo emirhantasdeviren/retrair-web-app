@@ -11,6 +11,7 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IIyzipayService, IyzipayService>();
+builder.Services.AddScoped<IEventProducerService, EventProducerService>();
 
 builder.Services.AddControllers();
 
