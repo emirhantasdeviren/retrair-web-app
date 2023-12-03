@@ -11,5 +11,5 @@ public class Order
     public required Address ShippingAddress { get; set; }
     public required Address BillingAddress { get; set; }
     public double PaidPrice { get; set; }
-
+    public Guid ItemId { get; set; }
 }
