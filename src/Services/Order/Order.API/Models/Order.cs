@@ -13,5 +13,5 @@ public class Order
     public required Address BillingAddress { get; set; }
     public double PaidPrice { get; set; }
 
-    public List<Item> Items { get; set; }
+    public List<Item> Items { get; set; } = new List<Item>();
 }

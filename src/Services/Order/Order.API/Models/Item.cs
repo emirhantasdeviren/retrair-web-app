@@ -8,5 +8,5 @@ public class Item
 
 
     public Guid OderId { get; set; }
-    public Order Order { get; set; }
+    public Order Order { get; set; } = null!;
 }
